@@ -10,7 +10,7 @@
     "_comment3": "Exécute les scripts 'build:client' et 'build:server' pour compiler le code client et serveur",
     "build": "npm run build:client && npm run build:server",
     "_comment4": "Exécute les scripts 'build' pour compiler le code, puis exécute le code serveur en utilisant Node.js",
-    "start": "npm run build & node ./build/server.js"
+    "start": "npm run build && node ./build/server.js"
   },
   "dependencies": {
     "esbuild": "0.14.13",
