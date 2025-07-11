@@ -1,14 +1,38 @@
-// Importe le module esbuild : "esbuild" est un outil de construction (bundler) rapide et efficace pour JavaScript et TypeScript. Il est conçu pour la création de projets front-end et back-end, ainsi que pour les applications Node.js.
+// esbuild.config.js
 const esbuild = require('esbuild');
 
-// Utilise esbuild pour construire le code
-esbuild.build({
-  // Spécifie le point d'entrée du code à compiler, ici le fichier "server.jsx" dans le dossier "server"
+// Build client
+const buildClient = esbuild.build({
+  entryPoints: ['src/main.jsx'],
+  bundle: true,
+  outdir: 'dist',
+  loader: {
+    '.js': 'jsx',
+    '.css': 'css',
+  },
+  format: 'esm',
+  splitting: false,
+  platform: 'browser',
+  sourcemap: true,
+}).then(() => {
+  console.log('✅ Client built');
+}).catch((e) => {
+  console.error('❌ Client build failed:', e);
+});
+
+// Build server
+const buildServer = esbuild.build({
   entryPoints: ['server/server.jsx'],
-  // Spécifie le fichier de sortie généré après la compilation, ici "build/server.js"
+  bundle: true,
   outfile: 'build/server.js',
-  // Spécifie la plateforme cible, ici "node" pour exécuter le code dans un environnement Node.js
   platform: 'node',
-  // Active la surveillance des changements, ce qui signifie que esbuild surveillera les fichiers sources et recompilera automatiquement en cas de modification
-  watch: true,
-}).catch(() => process.exit(1)); // En cas d'erreur lors de la compilation, le processus sera terminé avec un code d'erreur 1
+  target: 'node22',
+  sourcemap: true,
+  external: ['express', 'react', 'react-dom'],
+}).then(() => {
+  console.log('✅ Server built');
+}).catch((e) => {
+  console.error('❌ Server build failed:', e);
+});
+
+Promise.all([buildClient, buildServer]);

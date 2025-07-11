@@ -1,4 +1,5 @@
 import React from "react"; // Utile pour le build
+import "./app.css";
 
 function App() {
   // Utilise le hook d'état "useState" de React pour définir une variable d'état "times" initialisée à 0 et une fonction "setTimes" pour la mettre à jour

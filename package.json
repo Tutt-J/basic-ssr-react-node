@@ -3,30 +3,24 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "_comment1": "Compile le code client en utilisant esbuild, en entrée src/index.js, en sortie dist/bundle.js, et en spécifiant que les fichiers .js sont des fichiers jsx",
-    "build:client": "esbuild src/main.jsx --bundle --outfile=dist/bundle.js --loader:.js=jsx",
-    "_comment2": "Compile le code serveur en utilisant esbuild, en entrée server/server.jsx, en sortie build/server.js, et en spécifiant que la plateforme cible est node",
-    "build:server": "esbuild server/server.jsx --bundle --outfile=build/server.js --platform=node",
-    "_comment3": "Exécute les scripts 'build:client' et 'build:server' pour compiler le code client et serveur",
-    "build": "npm run build:client && npm run build:server",
-    "_comment4": "Exécute les scripts 'build' pour compiler le code, puis exécute le code serveur en utilisant Node.js",
+    "build": "node esbuild.config.js",
     "start": "npm run build && node ./build/server.js"
   },
   "dependencies": {
-    "esbuild": "^0.25.5",
+    "esbuild": "^0.25.6",
     "express": "^5.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
+    "@eslint/js": "^9.30.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react-swc": "^3.10.2",
-    "eslint": "^9.29.0",
+    "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.2.0",
-    "vite": "^7.0.0"
+    "globals": "^16.3.0",
+    "vite": "^7.0.4"
   }
 }

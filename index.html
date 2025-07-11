@@ -1,14 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <link rel="stylesheet" href="/main.css">
   </head>
   <body>
     <div id="root"></div>
-    <!-- Charge le code JavaScript client (React + hydration) compilé dans bundle.js -->
-    <script src="/bundle.js"></script>
+    <!-- Charge le code JavaScript client (React + hydration) compilé dans main.js -->
+    <!-- Uniquement s'il y a hydration et nécessité d'un rendu côté client (interactions, css, etc)-->
+    <script src="/main.js"></script>
   </body>
 </html>

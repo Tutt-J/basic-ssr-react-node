@@ -18,24 +18,24 @@ const app = express();
 
 // Définit une route pour la racine du serveur (http://localhost:PORT/)
 app.get("/", (req, res) => {
-  // Lit le contenu du fichier "index.html" dans le dossier "public" en utilisant l'encodage "utf8" (utilisé comme un modèle de réponse)
+  // Lit le contenu du fichier "index.html" à la racine en utilisant l'encodage "utf8" (utilisé comme un modèle de réponse)
   fs.readFile(path.resolve("./index.html"), "utf8", (err, data) => {
     if (err) {
       // En cas d'erreur lors de la lecture du fichier, logge l'erreur dans la console et renvoie une réponse avec le code d'erreur 500 et le message "An error occurred"
-      return res.status(500).send("An error occurred");
+      return res.status(500).send("An error occurred when loading index.html");
     }
 
     // Remplace la balise "<div id="root"></div>" dans le contenu du fichier "index.html" par le rendu du composant "App" au format permet l'interactivité. 
     return res.send(
       data.replace(
         '<div id="root"></div>',
-        `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>`
+        `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>` //Utiliser renderToStaticMarkup s'il n'y a pas d'hydratation/interactions côté client
       )
     );
   });
 });
 
-// Utilise le middleware "express.static" pour servir les fichiers statiques depuis le dossier "dist" (par exemple, des fichiers JavaScript, CSS, etc.), avec une mise en cache de 30 jours (ici le fichier bundle.js généré)
+// Utilise le middleware "express.static" pour servir les fichiers statiques depuis le dossier "dist" (par exemple, des fichiers JavaScript, CSS, etc.). Pas necessaire si l'on fait du 100%SSR sans rendu côté client qui prenne le relais (interactions, css, etc).
 app.use(
   express.static(path.resolve(__dirname, "..", "dist"), { maxAge: "30d" })
 );
